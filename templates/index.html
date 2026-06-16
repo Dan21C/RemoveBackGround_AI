@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conversor de Video · Fondo Inteligente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect width="20" height="20" rx="5" fill="#2B6F7E"/>
+            <polygon points="7,5 7,15 15,10" fill="white"/>
+          </svg>
+        </div>
+        <span class="brand-name">VIDEO WEB TOOL</span>
+      </div>
+      <button class="btn-help" aria-label="Ayuda">?</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="hero">
+        <p class="eyebrow">Procesamiento de video para web</p>
+        <h1>Conversor de Video<br><span class="h1-accent">· Fondo Inteligente</span></h1>
+        <p class="lead">Sube un video, elimina el fondo y genera un WebM optimizado para usar en sitios web, landings o experiencias interactivas.</p>
+      </section>
+
+      <!-- STEPPER -->
+      <nav class="stepper" aria-label="Progreso">
+        <div class="stepper-step active" id="step1">
+          <div class="step-circle"><span class="step-num">1</span><svg class="step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="step-label">Archivo</span>
+        </div>
+        <div class="stepper-line" id="line12"></div>
+        <div class="stepper-step" id="step2">
+          <div class="step-circle"><span class="step-num">2</span><svg class="step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="step-label">Configuración</span>
+        </div>
+        <div class="stepper-line" id="line23"></div>
+        <div class="stepper-step" id="step3">
+          <div class="step-circle"><span class="step-num">3</span><svg class="step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="step-label">Conversión</span>
+        </div>
+        <div class="stepper-line" id="line34"></div>
+        <div class="stepper-step" id="step4">
+          <div class="step-circle"><span class="step-num">4</span><svg class="step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="step-label">Resultado</span>
+        </div>
+      </nav>
+
+      <!-- LAYOUT -->
+      <div class="layout">
+
+        <!-- LEFT: FORM -->
+        <form id="convertForm" class="col-left" novalidate>
+
+          <!-- CARD 1: ARCHIVO -->
+          <div class="card">
+            <h2 class="card-title">1. Archivo</h2>
+
+            <label class="dropzone" id="dropzone">
+              <input id="videoInput" type="file" name="video" accept="video/*,.mov,.mp4,.m4v,.avi,.webm" />
+              <div class="dz-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2B6F7E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <strong class="dz-main">Arrastra tu video aquí</strong>
+              <span class="dz-sub">o haz clic para seleccionarlo</span>
+              <span class="dz-formats">Formatos compatibles: .mov · .mp4 · .webm</span>
+            </label>
+
+            <div class="file-chip" id="fileChip" hidden>
+              <div class="file-chip-icon">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2B6F7E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="23 7 16 12 23 17 23 7"/>
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                </svg>
+              </div>
+              <div class="file-chip-info">
+                <span id="fileName" class="file-chip-name"></span>
+                <span id="fileMeta" class="file-chip-meta"></span>
+              </div>
+              <button type="button" class="file-chip-remove" id="removeFile" aria-label="Quitar archivo">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 2: CONFIGURACIÓN -->
+          <div class="card">
+            <h2 class="card-title">2. Configuración de salida</h2>
+            <div class="form-fields">
+
+              <div class="field">
+                <label class="field-label" for="mode">Modo</label>
+                <div class="select-wrap">
+                  <select id="mode" name="mode">
+                    <option value="remove_bg">Remover fondo y exportar WebM transparente</option>
+                    <option value="preserve_alpha">Solo convertir MOV con transparencia existente</option>
+                  </select>
+                  <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+
+              <div class="field" id="modelField">
+                <label class="field-label" for="model">Modelo rembg</label>
+                <div class="select-wrap">
+                  <select id="model" name="model">
+                    <option value="birefnet-general" selected>birefnet-general · mejor calidad</option>
+                    <option value="birefnet-portrait">birefnet-portrait · retratos y personas</option>
+                    <option value="isnet-general-use">isnet-general-use · balanceado</option>
+                    <option value="u2net">u2net · más rápido</option>
+                    <option value="u2netp">u2netp · liviano</option>
+                    <option value="silueta">silueta · personas/siluetas</option>
+                  </select>
+                  <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="crf">Calidad CRF: <strong id="crfValue">15</strong></label>
+                <input id="crf" name="crf" type="range" min="0" max="51" value="15" />
+                <div class="range-hints">
+                  <span>0 (mejor calidad)</span>
+                  <span>51 (menor tamaño)</span>
+                </div>
+                <p class="field-hint">Menor número = mejor calidad y archivo más pesado.</p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="max_width">Ancho máximo</label>
+                <div class="select-wrap">
+                  <select id="max_width" name="max_width">
+                    <option value="720">720 px · liviano</option>
+                    <option value="1080" selected>1080 px · recomendado web</option>
+                    <option value="1440">1440 px · alta calidad</option>
+                    <option value="9999">Original · sin escalar</option>
+                  </select>
+                  <svg class="chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- SUBMIT -->
+          <button id="submitBtn" type="submit" class="btn-primary" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Convertir a WebM
+          </button>
+
+        </form>
+
+        <!-- RIGHT: STATUS + RESULT -->
+        <div class="col-right">
+
+          <!-- CARD 3: CONVERSIÓN -->
+          <div class="card" id="statusPanel">
+            <h2 class="card-title">3. Conversión</h2>
+
+            <div id="stateIdle" class="state-idle">
+              <div class="idle-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <p class="idle-text">Configura los parámetros y haz clic en <strong>Convertir a WebM</strong> para comenzar.</p>
+            </div>
+
+            <div id="stateActive" class="state-active" hidden>
+              <div class="status-row">
+                <div class="status-badge" id="loader">
+                  <div class="spinner"></div>
+                </div>
+                <div class="status-badge success-badge" id="doneBadge" hidden>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="status-badge error-badge" id="errorBadge" hidden>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </div>
+                <div class="status-text">
+                  <p class="status-title" id="statusTitle"></p>
+                  <p class="status-sub" id="statusText"></p>
+                </div>
+              </div>
+              <div class="progressWrap" id="progressWrap" hidden>
+                <div class="progressBar">
+                  <div class="progressFill" id="progressFill"></div>
+                </div>
+                <span class="progressLabel" id="progressLabel">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4: RESULTADO -->
+          <div class="card result-card" id="result" hidden>
+            <h2 class="card-title">4. Resultado</h2>
+
+            <div class="result-body">
+              <div class="checker">
+                <video id="previewVideo" autoplay loop muted playsinline controls></video>
+                <div class="checker-empty" id="checkerEmpty">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></rect></svg>
+                  <p>Tu video aparecerá aquí</p>
+                </div>
+              </div>
+
+              <div class="result-info">
+                <h3 class="result-title">Video listo</h3>
+                <p class="result-sub">Descarga el archivo WebM o copia el código para insertarlo en tu sitio.</p>
+                <div class="result-chips">
+                  <span class="chip">WebM VP9</span>
+                  <span class="chip">Alpha: sí</span>
+                </div>
+                <a id="downloadLink" class="btn-primary" href="#" download>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Descargar WebM
+                </a>
+                <button type="button" class="btn-ghost" id="convertAnotherBtn">
+                  Convertir otro video
+                </button>
+              </div>
+            </div>
+
+            <!-- SNIPPET -->
+            <div class="snippet">
+              <div class="snippet-header">
+                <span class="snippet-label">HTML para insertar en tu sitio</span>
+                <button type="button" class="btn-copy" id="copyEmbedBtn" aria-label="Copiar código">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copiar
+                </button>
+              </div>
+              <pre class="snippet-pre"><code id="embedCode"></code></pre>
+            </div>
+
+          </div>
+
+        </div><!-- /col-right -->
+      </div><!-- /layout -->
+    </div><!-- /container -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-copy">© 2026 Daniel Felipe Castañeda. Todos los derechos reservados.</span>
+      <nav class="footer-nav" aria-label="Links secundarios">
+        <a href="#">Términos</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Soporte</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="alert" aria-live="polite" hidden>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Código copiado
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
